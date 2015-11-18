@@ -45,12 +45,13 @@ RSpec.feature "Unauthenticated user can Log In or Sign Up", type: :feature do
     click_button "Submit"
     click_link_or_button "Sign Out"
 
+    expect(current_path).to eq(login_path)
     expect(page).to have_selector(:link_or_button, "Log In")
   end
 
   scenario "User must be logged in to view links index" do
     visit links_path
 
-    expect(current_path).to eq(root_path)
+    expect(current_path).to eq(login_path)
   end
 end

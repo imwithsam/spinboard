@@ -1,5 +1,6 @@
 class LinksController < ApplicationController
-  def index
+  before_filter :authorize
 
+  def index
   end
 end
