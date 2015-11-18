@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get "/signup" => "users#new"
 
   resources :users, only: [:new, :create]
-  resources :links, only: [:index]
+  resources :links, only: [:index, :create]
   resources :sessions, only: [:new, :create, :destroy]
 
   # Example of regular route:
