@@ -4,6 +4,7 @@ RSpec.feature "Unauthenticated user can Log In or Sign Up", type: :feature do
   scenario "User visits root and can sign up" do
     visit root_path
 
+    click_link_or_button "Sign Up"
     fill_in "Email address", with: "Jane Doe"
     fill_in "Password", with: "password"
     fill_in "Password confirmation", with: "password"
