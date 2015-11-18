@@ -1,1 +1,19 @@
-<h2>Links</h2>
+<h2>Submit Link</h2>
+<%= form_for @link do |f| %>
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.submit "Submit" %>
+<% end %>
+
+<h2>My Links</h2>
+<% if @links %>
+  <% @links.each do |link| %>
+    <div>
+      <%= link_to link.title, link.url %>
+    </div>
+  <% end %>
+<% else %>
+  Submit a link above.
+<% end %>
