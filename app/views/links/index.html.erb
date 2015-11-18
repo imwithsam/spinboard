@@ -11,7 +11,8 @@
 <% if @links %>
   <% @links.each do |link| %>
     <div>
-      <%= link_to link.title, link.url %>
+      <p><%= link_to link.title, link.url %></p>
+      <p><%= link.read ? "read" : "unread" %></p>
     </div>
   <% end %>
 <% else %>

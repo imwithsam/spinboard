@@ -22,4 +22,14 @@ RSpec.feature "Authenitcated user can submit and view links", type: :feature do
 
     expect(page).to have_link("Bad Motivator Blog")
   end
+
+  scenario "A new link defaults to an unread status" do
+    visit links_path
+
+    fill_in "Url", with: "http://badmotivator.io/"
+    fill_in "Title", with: "Bad Motivator Blog"
+    click_button "Submit"
+
+    expect(page).to have_content("unread")
+  end
 end
