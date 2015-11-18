@@ -43,4 +43,26 @@ RSpec.feature "Authenitcated user can submit and view links", type: :feature do
     expect(page).to have_content("Unable to add link.")
     expect(page).to_not have_link("Invalid URL")
   end
+
+  scenario "User can view only their links" do
+    visit links_path
+
+    fill_in "Url", with: "http://badmotivator.io/"
+    fill_in "Title", with: "Bad Motivator Blog"
+    click_button "Submit"
+
+    expect(page).to have_link("Bad Motivator Blog")
+
+    User.create(
+      email_address: "samson2@example.com",
+      password:      "password"
+    )
+
+    visit login_path
+    fill_in "Email address", with: "samson2@example.com"
+    fill_in "Password", with: "password"
+    click_button "Submit"
+
+    expect(page).to_not have_link("Bad Motivator Blog")
+  end
 end
