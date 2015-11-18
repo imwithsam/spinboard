@@ -32,4 +32,15 @@ RSpec.feature "Authenitcated user can submit and view links", type: :feature do
 
     expect(page).to have_content("unread")
   end
+
+  scenario "Submitting an invalid link results in an error message" do
+    visit links_path
+
+    fill_in "Url", with: "invalid#url"
+    fill_in "Title", with: "Invalid URL"
+    click_button "Submit"
+
+    expect(page).to have_content("Unable to add link.")
+    expect(page).to_not have_link("Invalid URL")
+  end
 end
