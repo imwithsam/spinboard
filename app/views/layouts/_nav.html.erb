@@ -1,0 +1,6 @@
+<% if session[:user_id] %>
+  <%= link_to "Sign Out", "/logout", class: "btn btn-default" %>
+<% else %>
+  <%= link_to "Log In", "/login", class: "btn btn-primary" %>
+  <%= link_to "Sign Up", "/signup", class: "btn btn-default" %>
+<% end %>
