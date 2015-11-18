@@ -2,6 +2,7 @@ require "uri"
 
 class Link < ActiveRecord::Base
   validate :url_must_be_valid
+  belongs_to :user
 
   def url_must_be_valid
     uri = URI.parse(url)

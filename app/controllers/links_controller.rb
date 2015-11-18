@@ -3,22 +3,19 @@ class LinksController < ApplicationController
 
   def index
     @link = Link.new
-    @links = Link.all
+    @links = current_user.links
   end
 
   def create
-    @link = Link.new(link_params)
-    @links = Link.all
+    @link = current_user.links.new(link_params)
 
     if @link.save
-      flash.now[:success] = "#{@link.title} saved!"
-      @link = Link.new
-      render action: "index"
+      flash[:success] = "#{@link.title} saved!"
     else
-      @link = Link.new
-      flash.now[:warning] = "Unable to add link."
-      render action: "index"
+      flash[:warning] = "Unable to add link."
     end
+
+    redirect_to links_path
   end
 
 private
