@@ -3,7 +3,35 @@ class LinksController < ApplicationController
 
   def index
     @link = Link.new
-    @links = current_user.links
+    # @links = current_user.links
+
+    @filterrific = initialize_filterrific(
+      Link,
+      params[:filterrific],
+      select_options: {
+        sorted_by: Link.options_for_sorted_by,
+        read_status: Link.options_for_read_status
+      },
+      persistence_id: 'shared_key',
+      default_filter_params: { sorted_by: 'created_at_desc' },
+      available_filters: [
+        :sorted_by,
+        :read_status,
+        :search_query
+      ]
+    ) or return
+
+    @links = @filterrific.find.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
+  rescue ActiveRecord::RecordNotFound => e
+    # There is an issue with the persisted param_set. Reset it.
+    puts "Had to reset filterrific params: #{ e.message }"
+    redirect_to(reset_filterrific_url(format: :html)) and return
   end
 
   def create
