@@ -1,43 +1,8 @@
 <h2>Submit Link</h2>
-<%= form_for @link do |f| %>
-  <%= f.label :url %>
-  <%= f.text_field :url %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <%= f.submit "Submit" %>
-<% end %>
+<%= render "links/submit_link" %>
 
 <h2>Search/Filter</h2>
-<%= form_for_filterrific @filterrific do |f| %>
-  <div>
-    Search
-    <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-    <%= f.text_field(
-      :search_query,
-      class: 'filterrific-periodically-observed'
-    ) %>
-  </div>
-  <div>
-    Read?
-    <%= f.select(
-      :read_status,
-      @filterrific.select_options[:read_status],
-      { include_blank: '- Any -' }
-    ) %>
-  </div>
-  <div>
-    Sorted by
-    <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
-  </div>
-  <div>
-    <%= link_to(
-      'Reset filters',
-      reset_filterrific_url,
-    ) %>
-  </div>
-  <%# add an automated spinner to your form when the list is refreshed %>
-  <%= render_filterrific_spinner %>
-<% end %>
+<%= render "links/filterrific" %>
 
 <%= render(
   partial: "links/list",

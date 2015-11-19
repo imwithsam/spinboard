@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       redirect_to links_path
     else
       flash[:warning] = "Unable to create account."
-      redirect_to root_path
+      redirect_to :back
     end
   end
 
