@@ -33,7 +33,7 @@ class Link < ActiveRecord::Base
   }
 
   scope :read_status, lambda { |read_status|
-    where("read = ?", read_status)
+    where("read = ?", read_status == "read")
   }
 
   scope :search_query, lambda { |query|
@@ -60,7 +60,7 @@ class Link < ActiveRecord::Base
   }
 
   def self.options_for_read_status
-    [true, false]
+    ["read", "unread"]
   end
 
   def self.options_for_sorted_by
