@@ -5,15 +5,15 @@
 
   <table>
     <tr>
-      <th>URL</th>
-      <th>Title</th>
+      <th>Link</th>
+      <th>&nbsp;</th>
       <th>&nbsp;</th>
     </tr>
     <% links.each do |link| %>
       <tr>
-        <td><%= link.url %></td>
-        <td><%= link.title %></td>
-        <td><%= link.read %></td>
+        <td><%= link_to link.url, link.title, class: link.status %></td>
+        <td><%= read_status_url(link) %></td>
+        <td>Edit</td>
       </tr>
     <% end %>
   </table>
