@@ -18,15 +18,25 @@ class LinksController < ApplicationController
     redirect_to links_path
   end
 
+  def edit
+    @link = current_user.links.find(params[:id])
+  end
+
   def update
     @link = current_user.links.find(params[:id])
 
-    if @link && @link.update(title: params[:title], read: !params[:read])
+    if @link && @link.update(link_params)
       flash[:success] = "#{@link.title} updated!"
-      render json: @link
+      respond_to do |format|
+        format.html { redirect_to links_path }
+        format.json { render json: @link }
+      end
     else
       flash[:warning] = "Unable to update link."
-      render json: { success: false }
+      respond_to do |format|
+        format.html { redirect_to links_path }
+        format.json { render json: { success: false } }
+      end
     end
   end
 
