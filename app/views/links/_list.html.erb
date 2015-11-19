@@ -9,13 +9,18 @@
       <th>Short Link</th>
       <th>&nbsp;</th>
       <th>&nbsp;</th>
+      <th>&nbsp;</th>
     </tr>
     <% links.each do |link| %>
       <tr>
         <td><%= link_to link.title, link.url, class: link.status %></td>
-        <td><%= link_to link.short_url, link.short_url, class: ["short-link", link.status] %></td>
+        <td><%= link_to link.short_url, link.short_url,
+          class: ["short-link", link.status] %></td>
         <td><%= read_status_url(link) %></td>
-        <td><%= link_to "Edit", edit_link_path(link), class: "btn btn-default" %></td>
+        <td><%= link_to "Edit", edit_link_path(link),
+          class: "btn btn-default" %></td>
+        <td><%= link_to "Recommend Link", "/recommend/new?id=#{link.id}",
+          class: "btn btn-default" %></td>
       </tr>
     <% end %>
   </table>

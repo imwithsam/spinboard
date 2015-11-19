@@ -53,7 +53,9 @@ group :development do
   gem 'awesome_print'
   gem 'binding_of_caller'
   gem 'better_errors'
+  gem 'mandrill-api'
 end
- group :production do
-   gem 'rails_12factor'
- end
+
+group :production do
+  gem 'rails_12factor'
+end
