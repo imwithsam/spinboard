@@ -1,0 +1,8 @@
+.read {
+  color: gray;
+  text-decoration: line-through;
+}
+
+.unread {
+  color: black;
+}
