@@ -1,0 +1,7 @@
+<h2>Recommend Link</h2>
+<%= form_tag "/recommend" do %>
+<%= label_tag "Email address" %>
+<%= text_field_tag "email_address" %>
+<%= hidden_field_tag "id", @link.id %>
+<%= submit_tag "Submit" %>
+<% end %>
