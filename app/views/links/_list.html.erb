@@ -11,7 +11,7 @@
     </tr>
     <% links.each do |link| %>
       <tr>
-        <td><%= link_to link.url, link.title, class: link.status %></td>
+        <td><%= link_to link.title, link.url, class: link.status %></td>
         <td><%= read_status_url(link) %></td>
         <td>Edit</td>
       </tr>
