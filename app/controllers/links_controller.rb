@@ -1,27 +1,9 @@
 class LinksController < ApplicationController
-  before_filter :authorize
+  before_action :authorize
+  before_action :get_filtered_links, only: [:index, :update]
 
   def index
     @link = Link.new
-    # @links = current_user.links
-
-    @filterrific = initialize_filterrific(
-      Link,
-      params[:filterrific],
-      select_options: {
-        sorted_by: Link.options_for_sorted_by,
-        read_status: Link.options_for_read_status
-      },
-      persistence_id: 'shared_key',
-      default_filter_params: { sorted_by: 'created_at_desc' },
-      available_filters: [
-        :sorted_by,
-        :read_status,
-        :search_query
-      ]
-    ) or return
-
-    @links = @filterrific.find.page(params[:page])
 
     respond_to do |format|
       format.html
@@ -57,14 +39,11 @@ class LinksController < ApplicationController
       flash[:success] = "#{@link.title} updated!"
       respond_to do |format|
         format.html { redirect_to links_path }
-        format.json { render json: @link }
+        format.js
       end
     else
       flash[:warning] = "Unable to update link."
-      respond_to do |format|
-        format.html { redirect_to links_path }
-        format.json { render json: { success: false } }
-      end
+      redirect_to links_path
     end
   end
 
@@ -72,5 +51,25 @@ private
 
   def link_params
     params.require(:link).permit(:url, :title, :read)
+  end
+
+  def get_filtered_links
+    @filterrific = initialize_filterrific(
+      current_user.links,
+      params[:filterrific],
+      select_options: {
+        sorted_by: Link.options_for_sorted_by,
+        read_status: Link.options_for_read_status
+      },
+      persistence_id: 'shared_key',
+      default_filter_params: { sorted_by: 'created_at_desc' },
+      available_filters: [
+        :sorted_by,
+        :read_status,
+        :search_query
+      ]
+    ) or return
+
+    @links = @filterrific.find.page(params[:page])
   end
 end

@@ -18,7 +18,7 @@ RSpec.feature "User can update link status", type: :feature do
     click_button "Submit"
   end
 
-  xscenario "User can update new link status from unread to read", js: true do
+  scenario "User can update new link status from unread to read", js: true do
     visit links_path
 
     click_link_or_button "Mark as Read"
