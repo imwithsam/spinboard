@@ -13,7 +13,7 @@
       <tr>
         <td><%= link_to link.title, link.url, class: link.status %></td>
         <td><%= read_status_url(link) %></td>
-        <td>Edit</td>
+        <td><%= link_to "Edit", edit_link_path(link), class: "btn btn-default" %></td>
       </tr>
     <% end %>
   </table>
