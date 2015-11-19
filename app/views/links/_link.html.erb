@@ -4,4 +4,7 @@
     <%= link_to (link.read ? "Mark as Unread" : "Mark as Read"), "#",
       class: "status", "data-read": link.read %>
   </div>
+  <div>
+    <%= link_to "Edit", edit_link_path(link) %>
+  </div>
 </div>
