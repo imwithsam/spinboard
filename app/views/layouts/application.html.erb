@@ -8,7 +8,9 @@
 </head>
 <body>
   <%= render "/layouts/nav" %>
-  <%= render "/layouts/flash" %>
-  <%= yield %>
+  <div class="container">
+    <%= render "/layouts/flash" %>
+    <%= yield %>
+  </div>
 </body>
 </html>

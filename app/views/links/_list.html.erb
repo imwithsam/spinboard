@@ -1,29 +1,31 @@
 <div id="filterrific_results">
-  <div>
-    <%= page_entries_info links %>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Link</th>
+          <th>Short Link</th>
+          <th>Status</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% links.each do |link| %>
+          <tr>
+            <td><%= link_to link.title, link.url, class: link.status %></td>
+            <td><%= link_to link.short_url, link.short_url,
+              class: ["short-link", link.status] %></td>
+            <td><%= read_status_url(link) %></td>
+            <td><%= link_to "Edit", edit_link_path(link),
+              class: "btn btn-warning" %></td>
+            <td><%= link_to "Recommend Link", "/recommend/new?id=#{link.id}",
+              class: "btn btn-success" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-
-  <table>
-    <tr>
-      <th>Link</th>
-      <th>Short Link</th>
-      <th>&nbsp;</th>
-      <th>&nbsp;</th>
-      <th>&nbsp;</th>
-    </tr>
-    <% links.each do |link| %>
-      <tr>
-        <td><%= link_to link.title, link.url, class: link.status %></td>
-        <td><%= link_to link.short_url, link.short_url,
-          class: ["short-link", link.status] %></td>
-        <td><%= read_status_url(link) %></td>
-        <td><%= link_to "Edit", edit_link_path(link),
-          class: "btn btn-default" %></td>
-        <td><%= link_to "Recommend Link", "/recommend/new?id=#{link.id}",
-          class: "btn btn-default" %></td>
-      </tr>
-    <% end %>
-  </table>
 </div>
 
 <%= will_paginate links %>
