@@ -37,7 +37,7 @@ class Link < ActiveRecord::Base
   }
 
   scope :search_query, lambda { |query|
-    return nil  if query.blank?
+    return nil if query.blank?
 
     # condition query, parse into individual keywords
     terms = query.downcase.split(/\s+/)
