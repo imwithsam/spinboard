@@ -11,6 +11,7 @@ class Link < ActiveRecord::Base
   )
 
   validate :url_must_be_valid
+  before_save :create_short_link
   belongs_to :user
 
   scope :sorted_by, lambda { |sort_option|
@@ -80,5 +81,10 @@ private
     errors.add(:url, "must be valid") unless uri.kind_of?(URI::HTTP)
   rescue URI::InvalidURIError
     errors.add(:url, "must be valid")
+  end
+
+  def create_short_link
+    shorty = ShortURL.shorten(url, :tinyurl)
+    write_attribute(:short_url, shorty)
   end
 end
