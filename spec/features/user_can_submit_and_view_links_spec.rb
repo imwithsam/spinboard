@@ -30,7 +30,7 @@ RSpec.feature "Authenitcated user can submit and view links", type: :feature do
     fill_in "Title", with: "Bad Motivator Blog"
     click_button "Submit"
 
-    expect(page).to have_content("unread")
+    expect(page).to have_content("Mark as Read")
   end
 
   scenario "Submitting an invalid link results in an error message" do
