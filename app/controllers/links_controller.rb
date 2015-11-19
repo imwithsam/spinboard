@@ -55,7 +55,7 @@ private
 
   def get_filtered_links
     @filterrific = initialize_filterrific(
-      Link,
+      current_user.links,
       params[:filterrific],
       select_options: {
         sorted_by: Link.options_for_sorted_by,
